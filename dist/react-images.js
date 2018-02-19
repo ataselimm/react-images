@@ -452,8 +452,9 @@ function Footer(_ref, _ref2) {
 	    countCurrent = _ref.countCurrent,
 	    countSeparator = _ref.countSeparator,
 	    countTotal = _ref.countTotal,
+	    customFooter = _ref.customFooter,
 	    showCount = _ref.showCount,
-	    props = objectWithoutProperties(_ref, ['caption', 'countCurrent', 'countSeparator', 'countTotal', 'showCount']);
+	    props = objectWithoutProperties(_ref, ['caption', 'countCurrent', 'countSeparator', 'countTotal', 'customFooter', 'showCount']);
 
 	if (!caption && !showCount) return null;
 
@@ -467,7 +468,7 @@ function Footer(_ref, _ref2) {
 		countTotal
 	) : React__default.createElement('span', null);
 
-	return React__default.createElement(
+	var defaultFooter = React__default.createElement(
 		'div',
 		_extends({ className: noImportant.css(classes.footer) }, props),
 		caption ? React__default.createElement(
@@ -477,6 +478,8 @@ function Footer(_ref, _ref2) {
 		) : React__default.createElement('span', null),
 		imageCount
 	);
+
+	return customFooter ? customFooter : defaultFooter;
 }
 
 Footer.propTypes = {
@@ -484,6 +487,7 @@ Footer.propTypes = {
 	countCurrent: PropTypes.number,
 	countSeparator: PropTypes.string,
 	countTotal: PropTypes.number,
+	customFooter: PropTypes.node,
 	showCount: PropTypes.bool
 };
 Footer.contextTypes = {
@@ -1334,6 +1338,7 @@ var Lightbox = function (_Component) {
 		value: function renderFooter() {
 			var _props6 = this.props,
 			    currentImage = _props6.currentImage,
+			    customFooter = _props6.customFooter,
 			    images = _props6.images,
 			    imageCountSeparator = _props6.imageCountSeparator,
 			    showImageCount = _props6.showImageCount;
@@ -1346,6 +1351,7 @@ var Lightbox = function (_Component) {
 				countCurrent: currentImage + 1,
 				countSeparator: imageCountSeparator,
 				countTotal: images.length,
+				customFooter: customFooter,
 				showCount: showImageCount
 			});
 		}
@@ -1387,6 +1393,7 @@ Lightbox.propTypes = {
 	closeButtonTitle: PropTypes.string,
 	currentImage: PropTypes.number,
 	customControls: PropTypes.arrayOf(PropTypes.node),
+	customFooter: PropTypes.node,
 	enableKeyboardInput: PropTypes.bool,
 	imageCountSeparator: PropTypes.string,
 	images: PropTypes.arrayOf(PropTypes.shape({
